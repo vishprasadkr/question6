@@ -1,18 +1,21 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: hello-world
+  name: nginx-deployment
 spec:
-  replicas: 1
-  revisionHistoryLimit: 5
-    selector:
-      matchLabels:
-        app: hello-world
-    template:
-      metadata:
-        labels:
-            app: hello-world
-      spec:
-        containers:
-        - name: hello-world
-          image: nginx-skaffold
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: vishnu3832/webserver-image:latest
+        ports:
+        - containerPort: 80
+...
